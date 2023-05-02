@@ -31,6 +31,10 @@ h2 {
   resize: none;
 }
 
+img {
+  margin: 2rem 1rem;
+}
+
 button {
   padding: 0.6rem 1rem;
   background-color: #2d6f8b;
