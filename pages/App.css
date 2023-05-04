@@ -35,6 +35,11 @@ img {
   margin: 2rem 1rem;
 }
 
+.app-result {
+  border: 1px solid gray;
+  border-radius: 5px;
+}
+
 button {
   padding: 0.6rem 1rem;
   background-color: #2d6f8b;
