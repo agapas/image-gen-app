@@ -8,34 +8,38 @@ body {
 }
 
 .app {
+  padding: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   color: #440F5A;
 }
 
-h2 {
+h1 {
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 1.8rem;
 }
 
-.app-input {
-  width: 40%;
-  height: 10rem;
-  opacity: 0.8;
+.text-prompt {
+  width: 100%;
   margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+textarea {
+  height: 5rem;
+  margin-top: 6px;
   padding: 1rem;
+  opacity: 0.8;
   font-size: 1.1rem;
   border: 1px solid gray;
   border-radius: 5px;
   resize: none;
 }
 
-img {
-  margin: 2rem 1rem;
-}
-
-.app-result {
+.result-image {
   border: 1px solid gray;
   border-radius: 5px;
 }
@@ -55,4 +59,20 @@ button {
 button:hover {
   background-color: #440F5A;
   border-color: #2b063b;
+}
+
+@media screen and (min-width: 600px) {
+  .text-prompt {
+    width: 60%;
+  }
+
+  img {
+    margin: 2rem 1rem;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .text-prompt {
+    width: 40%;
+  }
 }
