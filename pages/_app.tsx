@@ -1,6 +1,6 @@
 import getConfig from "next/config";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Configuration, OpenAIApi, CreateImageRequestSizeEnum } from "openai";
 import imageIcon from "../assets/imageIcon.png";
 import "./App.css";
@@ -15,6 +15,9 @@ export default function App() {
   const [textPrompt, setTextPrompt] = useState("");
   const [selectedImageSize, setSelectedImageSize] = useState(defaultImageSize);
   const [loading, setLoading] = useState(false);
+  const [typedLoadingText, setTypedLoadingText] = useState("");
+
+  const loadingText = "Generating image... Please wait...";
 
   const { publicRuntimeConfig } = getConfig();
   const apiKey =
@@ -30,6 +33,7 @@ export default function App() {
   const openai = new OpenAIApi(configuration);
 
   const generateImage = async () => {
+    setTypedLoadingText("");
     setLoading(true);
 
     // setTimeout(() => {
@@ -37,7 +41,7 @@ export default function App() {
     //   setImageResult(
     //     "https://oaidalleapiprodscus.blob.core.windows.net/private/org-vlaWMOf9DQoKKX0PkXCBPwgR/user-MEP4wZ1uPHbxJmXj5jVL0cHe/img-gCiBT1u8CqcHTOJACHawDVf3.png?st=2023-05-05T12%3A43%3A38Z&se=2023-05-05T14%3A43%3A38Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2023-05-05T04%3A48%3A59Z&ske=2023-05-06T04%3A48%3A59Z&sks=b&skv=2021-08-06&sig=gFJzwEFNwSu/OT10epNGLp9iCeW3Ka%2BMeSboG/6u62I%3D"
     //   );
-    // }, 1200);
+    // }, 3000);
 
     try {
       const response = await openai.createImage({
@@ -57,6 +61,23 @@ export default function App() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (loading) {
+      let i = 0;
+      const typing = setInterval(() => {
+        setTypedLoadingText(loadingText.slice(0, i));
+        i++;
+
+        if (i >= loadingText.length + 1) {
+          setTypedLoadingText("");
+          i = 0;
+        }
+      }, 60);
+
+      return () => clearInterval(typing);
+    }
+  }, [loading]);
 
   return (
     <div className="app">
@@ -82,11 +103,7 @@ export default function App() {
       >
         {Object.values(CreateImageRequestSizeEnum).map((value) => {
           return (
-            <option
-              key={value}
-              value={value}
-              selected={value === selectedImageSize}
-            >
+            <option key={value} value={value}>
               {displayImageSize(value)}
             </option>
           );
@@ -95,7 +112,7 @@ export default function App() {
       <button onClick={generateImage} disabled={loading}>
         Generate Image
       </button>
-      <div className="loading">{loading ? "Loading..." : ""}</div>
+      <div className="loading">{loading ? typedLoadingText : ""}</div>
       {imageResult.length ? (
         <div className="result-wrapper">
           <Image
