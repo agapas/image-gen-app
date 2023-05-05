@@ -1,13 +1,19 @@
 import getConfig from "next/config";
 import Image from "next/image";
 import { useState } from "react";
-import { Configuration, OpenAIApi } from "openai";
+import { Configuration, OpenAIApi, CreateImageRequestSizeEnum } from "openai";
 import imageIcon from "../assets/imageIcon.png";
 import "./App.css";
+
+const displayImageSize = (imageSize: CreateImageRequestSizeEnum) =>
+  imageSize.replace("x", " x ");
+
+const defaultImageSize: CreateImageRequestSizeEnum = "1024x1024";
 
 export default function App() {
   const [imageResult, setImageResult] = useState("");
   const [textPrompt, setTextPrompt] = useState("");
+  const [selectedImageSize, setSelectedImageSize] = useState(defaultImageSize);
   const [loading, setLoading] = useState(false);
 
   const { publicRuntimeConfig } = getConfig();
@@ -37,7 +43,7 @@ export default function App() {
       const response = await openai.createImage({
         prompt: textPrompt, // maxLength: 1000 characters
         n: 1, // 1-10, default: 1
-        size: "256x256", // 256x256, 512x512 or 1024x1024, default: 1024x1024
+        size: selectedImageSize, // 256x256, 512x512 or 1024x1024, default: 1024x1024
       });
 
       const imageData = response.data;
@@ -67,6 +73,25 @@ export default function App() {
           onChange={(e) => setTextPrompt(e.target.value)}
         />
       </div>
+      <select
+        disabled={loading}
+        value={selectedImageSize}
+        onChange={(e) =>
+          setSelectedImageSize(e.target.value as CreateImageRequestSizeEnum)
+        }
+      >
+        {Object.values(CreateImageRequestSizeEnum).map((value) => {
+          return (
+            <option
+              key={value}
+              value={value}
+              selected={value === selectedImageSize}
+            >
+              {displayImageSize(value)}
+            </option>
+          );
+        })}
+      </select>
       <button onClick={generateImage} disabled={loading}>
         Generate Image
       </button>
