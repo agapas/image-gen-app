@@ -16,9 +16,6 @@ export default function App() {
   const [promptError, setPromptError] = useState<string | undefined>();
   const [selectedImageSize, setSelectedImageSize] = useState(defaultImageSize);
   const [loading, setLoading] = useState(false);
-  const [typedLoadingText, setTypedLoadingText] = useState("");
-
-  const loadingText = "Generating image... Please wait...";
 
   const { publicRuntimeConfig } = getConfig();
   const apiKey =
@@ -39,7 +36,6 @@ export default function App() {
       return;
     }
 
-    setTypedLoadingText("");
     setLoading(true);
 
     setTimeout(() => {
@@ -67,23 +63,6 @@ export default function App() {
     //   setLoading(false);
     // }
   };
-
-  useEffect(() => {
-    if (loading) {
-      let i = 0;
-      const typing = setInterval(() => {
-        setTypedLoadingText(loadingText.slice(0, i));
-        i++;
-
-        if (i >= loadingText.length + 1) {
-          setTypedLoadingText("");
-          i = 0;
-        }
-      }, 60);
-
-      return () => clearInterval(typing);
-    }
-  }, [loading]);
 
   const onTextPromptChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     if (promptError) {
@@ -130,9 +109,8 @@ export default function App() {
       <button onClick={generateImage} disabled={loading}>
         Generate Image
       </button>
-      <div className="loading">{loading ? typedLoadingText : ""}</div>
       {loading ? (
-        <div className="lds-ripple">
+        <div className="loading-ripple">
           <div></div>
           <div></div>
         </div>
