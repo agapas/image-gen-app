@@ -42,30 +42,30 @@ export default function App() {
     setTypedLoadingText("");
     setLoading(true);
 
-    // setTimeout(() => {
+    setTimeout(() => {
+      setLoading(false);
+      setImageResult(
+        "https://oaidalleapiprodscus.blob.core.windows.net/private/org-vlaWMOf9DQoKKX0PkXCBPwgR/user-MEP4wZ1uPHbxJmXj5jVL0cHe/img-gCiBT1u8CqcHTOJACHawDVf3.png?st=2023-05-05T12%3A43%3A38Z&se=2023-05-05T14%3A43%3A38Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2023-05-05T04%3A48%3A59Z&ske=2023-05-06T04%3A48%3A59Z&sks=b&skv=2021-08-06&sig=gFJzwEFNwSu/OT10epNGLp9iCeW3Ka%2BMeSboG/6u62I%3D"
+      );
+    }, 3000);
+
+    // try {
+    //   const response = await openai.createImage({
+    //     prompt: textPrompt, // maxLength: 1000 characters
+    //     n: 1, // 1-10, default: 1
+    //     size: selectedImageSize, // 256x256, 512x512 or 1024x1024, default: 1024x1024
+    //   });
+
+    //   const imageData = response.data;
+    //   const imageUrl = imageData.data[0].url;
+    //   console.log("imageUrl: ", imageUrl);
+
+    //   setImageResult(imageUrl || "");
     //   setLoading(false);
-    //   setImageResult(
-    //     "https://oaidalleapiprodscus.blob.core.windows.net/private/org-vlaWMOf9DQoKKX0PkXCBPwgR/user-MEP4wZ1uPHbxJmXj5jVL0cHe/img-gCiBT1u8CqcHTOJACHawDVf3.png?st=2023-05-05T12%3A43%3A38Z&se=2023-05-05T14%3A43%3A38Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2023-05-05T04%3A48%3A59Z&ske=2023-05-06T04%3A48%3A59Z&sks=b&skv=2021-08-06&sig=gFJzwEFNwSu/OT10epNGLp9iCeW3Ka%2BMeSboG/6u62I%3D"
-    //   );
-    // }, 3000);
-
-    try {
-      const response = await openai.createImage({
-        prompt: textPrompt, // maxLength: 1000 characters
-        n: 1, // 1-10, default: 1
-        size: selectedImageSize, // 256x256, 512x512 or 1024x1024, default: 1024x1024
-      });
-
-      const imageData = response.data;
-      const imageUrl = imageData.data[0].url;
-      console.log("imageUrl: ", imageUrl);
-
-      setImageResult(imageUrl || "");
-      setLoading(false);
-    } catch (error) {
-      console.log(error);
-      setLoading(false);
-    }
+    // } catch (error) {
+    //   console.log(error);
+    //   setLoading(false);
+    // }
   };
 
   useEffect(() => {
@@ -131,7 +131,12 @@ export default function App() {
         Generate Image
       </button>
       <div className="loading">{loading ? typedLoadingText : ""}</div>
-      {imageResult.length ? (
+      {loading ? (
+        <div className="lds-ripple">
+          <div></div>
+          <div></div>
+        </div>
+      ) : imageResult.length ? (
         <div className="result-wrapper">
           <Image
             className="result-image"
