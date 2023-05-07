@@ -13,6 +13,7 @@ const defaultImageSize: CreateImageRequestSizeEnum = "1024x1024";
 export default function App() {
   const [imageResult, setImageResult] = useState("");
   const [textPrompt, setTextPrompt] = useState("");
+  const [promptError, setPromptError] = useState<string | undefined>();
   const [selectedImageSize, setSelectedImageSize] = useState(defaultImageSize);
   const [loading, setLoading] = useState(false);
   const [typedLoadingText, setTypedLoadingText] = useState("");
@@ -33,6 +34,11 @@ export default function App() {
   const openai = new OpenAIApi(configuration);
 
   const generateImage = async () => {
+    if (!textPrompt?.length) {
+      setPromptError("Please add your description. It's required.");
+      return;
+    }
+
     setTypedLoadingText("");
     setLoading(true);
 
@@ -79,6 +85,14 @@ export default function App() {
     }
   }, [loading]);
 
+  const onTextPromptChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    if (promptError) {
+      setPromptError(undefined);
+    }
+
+    setTextPrompt(e.target.value);
+  };
+
   return (
     <div className="app">
       <h1>Create images with your mind and DALL-E</h1>
@@ -88,11 +102,15 @@ export default function App() {
         </label>
         <textarea
           id="prompt-input"
+          className={promptError ? "has-error" : ""}
           placeholder="Happy pink elephant riding bicycle on a stone path"
           disabled={loading}
           value={textPrompt}
-          onChange={(e) => setTextPrompt(e.target.value)}
+          onChange={onTextPromptChange}
         />
+        <div className="error-message">
+          {promptError ? "Please add your description. It's required." : ""}
+        </div>
       </div>
       <select
         disabled={loading}
