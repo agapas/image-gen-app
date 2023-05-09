@@ -5,7 +5,7 @@ A simple image generator application written in React. The app creates unique im
 ## UI Example
 
 <p align="middle">
-  <img src="https://raw.githubusercontent.com/agapas/image-gen-app/master/assets/exampleUI.png" width="1000"/>
+  <img src="https://github.com/agapas/image-gen-app/blob/main/assets/exampleUI.png" width="800"/>
 </p>
 
 ## Additional Info
