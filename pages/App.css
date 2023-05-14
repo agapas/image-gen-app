@@ -4,6 +4,7 @@
   --caret-icon: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
   --error: red;
   --placeholder-color: #bdbdbd;
+  --disabled-color: #6d6d6d;
 }
 
 html {
@@ -34,7 +35,7 @@ h1 {
   margin-bottom: 1.8rem;
 }
 
-.text-prompt {
+.textarea-with-label, .select-with-label {
   width: 100%;
   margin-bottom: 0.5rem;
   display: flex;
@@ -44,12 +45,15 @@ h1 {
 
 textarea {
   height: 5rem;
-  margin-top: 6px;
-  padding: 1rem;
+  padding: 0.5rem 0.8rem;
   font-size: 1.1rem;
   border: var(--border);
   border-radius: var(--border-radius);
   resize: none;
+}
+
+label {
+  margin-bottom: 5px;
 }
 
 textarea:-moz-placeholder { /* Firefox 18- */
@@ -68,19 +72,26 @@ textarea::placeholder { /* Modern browsers */
   color: var(--placeholder-color);
 }
 
+textarea:disabled {
+  color: var(--disabled-color);
+}
+
 .has-error {
   border: 2px solid var(--error);
 }
 
-.error-message {
-  font-size: 0.8rem;
+.value-error, .result-error {
+  font-size: 0.9rem;
   color: var(--error);
   margin-top: 2px;
+  width: 100%;
+}
+
+.result-error {
+  word-break: break-word;
 }
 
 select {
-  width: 100%;
-  margin-bottom: 0.7rem;
   border: var(--border);
   border-radius: var(--border-radius);
   padding: 0.5rem 0.8rem;
@@ -100,12 +111,17 @@ select::-ms-expand {
   display: none;
 }
 
+select:disabled {
+  background-color: #efefef4d;
+  color: var(--disabled-color);
+  opacity: 1;
+}
+
 .loading-ripple {
   position: relative;
   display: inline-block;
-  width: 180px;
-  height: 180px;
-  margin-top: 20px;
+  width: 200px;
+  height: 200px;
 }
 
 .loading-ripple div {
@@ -122,15 +138,15 @@ select::-ms-expand {
 
 @keyframes loading-ripple {
   0% {
-    top: 80px;
-    left: 80px;
+    top: 96px; /* minus 4px (border size) to be in the center */
+    left: 96px; /* minus 4px (border size) to be in the center */
     width: 0;
     height: 0;
     opacity: 1;
   }
   100% {
-    top: 0;
-    left: 0;
+    top: 16px; /* minus 4px (border size) to be in the center */
+    left: 16px; /* minus 4px (border size) to be in the center */
     width: 160px;
     height: 160px;
     opacity: 0;
@@ -179,13 +195,13 @@ button:hover:enabled {
     padding: 0;
   }
 
-  .text-prompt, select {
+  .textarea-with-label, .select-with-label, .result-error {
     width: 60%;
   }
 }
 
 @media screen and (min-width: 768px) {
-  .text-prompt, select {
+  .textarea-with-label, .select-with-label, .result-error {
     width: 40%;
   }
 }

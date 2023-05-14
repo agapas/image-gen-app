@@ -12,7 +12,9 @@ A simple image generator application written in React. The app creates unique im
 
 To use the app, you have to sign up to the [OpenAI platform](https://platform.openai.com/signup) for an API key. Currently, you will receive $5 credit that you can use during 3-month trial period. After the trial or spending your entire credit, you will have to pay for the service based on the size of generated image. You can find more info about current [pricing](https://openai.com/pricing#image-models).
 
-## Installation
+## Project Setup
+
+### Installation
 
 - download or clone this repo
 
@@ -32,7 +34,7 @@ yarn
 pnpm i
 ```
 
-### API Key Setup
+### API Key
 
 - open the project in your editor
 - add new .env file to the project root directory with following content:
@@ -45,7 +47,7 @@ API_KEY="your-api-key-taken-from-OpenAI"
 
 #### A NOTE:
 
-The API key setup is only to use the app locally. In the case if you will use the Vercel for deployment, you will have an option to set the API_KEY as an environment variable in the project settings and use it instead.
+The API key setup is only to use the app locally. In the case if you will use the Vercel or another deployment platform, you will have an option to set the API_KEY as an environment variable in the project settings and use it instead.
 
 ### Running Project Locally
 
