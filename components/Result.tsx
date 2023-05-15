@@ -1,5 +1,7 @@
 import Image from "next/image";
 import imageIcon from "../assets/imageIcon.png";
+import { Error } from "./Error";
+import { LoadingRipple } from "./LoadingRipple";
 
 interface Props {
   loading: boolean;
@@ -9,16 +11,11 @@ interface Props {
 
 export const Result = ({ imageUrl, error, loading }: Props) => {
   if (loading) {
-    return (
-      <div className="loading-ripple">
-        <div></div>
-        <div></div>
-      </div>
-    );
+    <LoadingRipple />;
   }
 
   if (error) {
-    return <div className="result-error">{error}</div>;
+    return <Error errorMessage={error} className="result-error" />;
   }
 
   if (imageUrl) {

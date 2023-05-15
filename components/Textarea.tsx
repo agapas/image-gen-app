@@ -1,3 +1,5 @@
+import { Error } from "./Error";
+
 interface Props {
   disabled?: boolean;
   label?: string;
@@ -26,7 +28,7 @@ export const Textarea = ({
         value={value}
         onChange={onChange}
       />
-      {error ? <div className="value-error">{error}</div> : null}
+      {error ? <Error errorMessage={error} /> : null}
     </div>
   );
 };

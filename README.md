@@ -47,7 +47,7 @@ API_KEY="your-api-key-taken-from-OpenAI"
 
 #### A NOTE:
 
-The API key setup is only to use the app locally. In the case if you will use the Vercel or another deployment platform, you will have an option to set the API_KEY as an environment variable in the project settings and use it instead.
+The API key setup in `.env` file is just to use the app locally. In the case if you will use the Vercel or another deployment platform, you will have an option to set the API_KEY as an environment variable in the project settings and use it instead.
 
 ### Running Project Locally
 

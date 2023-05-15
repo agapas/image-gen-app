@@ -81,7 +81,7 @@ textarea:disabled {
   border: 2px solid var(--error);
 }
 
-.value-error, .result-error {
+.error {
   font-size: 0.9rem;
   color: var(--error);
   margin-top: 2px;
@@ -193,7 +193,7 @@ button:hover:enabled {
 
 @media screen and (min-width: 600px) {
   .app {
-    padding: 0;
+    padding: 2%;
   }
 
   .textarea-with-label, .select-with-label, .result-error {
