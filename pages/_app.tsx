@@ -1,11 +1,11 @@
 import getConfig from "next/config";
 import { Configuration, OpenAIApi, CreateImageRequestSizeEnum } from "openai";
 import { useState, PropsWithChildren } from "react";
-import "./App.css";
 import { Button } from "../components/Button";
 import { Result } from "../components/Result";
 import { Select } from "../components/Select";
 import { Textarea } from "../components/Textarea";
+import "./App.scss";
 
 const imageSizeOptions = [
   { label: "256 x 256", value: "256x256" },

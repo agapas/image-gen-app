@@ -1,4 +1,5 @@
 const dotenv = require('dotenv');
+const path = require('path');
 
 dotenv.config();
 
@@ -13,5 +14,9 @@ module.exports = {
   },
   publicRuntimeConfig: {
     apiKey: process.env.API_KEY
-  }
+  },
+  sassOptions: {
+    includePaths: [path.join(__dirname, "styles")],
+    prependData: `@use 'variables' as *;`
+  },
 };

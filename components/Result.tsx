@@ -11,7 +11,7 @@ interface Props {
 
 export const Result = ({ imageUrl, error, loading }: Props) => {
   if (loading) {
-    <LoadingRipple />;
+    return <LoadingRipple />;
   }
 
   if (error) {
