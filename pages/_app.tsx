@@ -38,9 +38,8 @@ export default function App() {
   const openai = new OpenAIApi(configuration);
 
   const generateImage = async () => {
-    if (!textPrompt.length) {
-      if (!promptError)
-        setPromptError("Please add your description. It's required.");
+    if (!textPrompt.length && !promptError) {
+      setPromptError("Please add your description. It's required.");
       return;
     }
 
@@ -88,16 +87,29 @@ export default function App() {
     }
   };
 
-  const onTextPromptChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const resetErrors = () => {
     if (promptError) {
       setPromptError(undefined);
+    }
+
+    if (resultError) {
+      setResultError(undefined);
+    }
+  };
+
+  const onTextPromptChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    if (promptError || resultError) {
+      resetErrors();
     }
 
     setTextPrompt(e.target.value);
   };
 
   const onImageSizeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    console.log(e.target, ", value: ", e.target.value);
+    if (promptError || resultError) {
+      resetErrors();
+    }
+
     setImageSize(e.target.value);
   };
 

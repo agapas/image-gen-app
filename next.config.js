@@ -17,6 +17,6 @@ module.exports = {
   },
   sassOptions: {
     includePaths: [path.join(__dirname, "styles")],
-    prependData: `@use 'variables' as *;`
+    prependData: `@use 'mixins' as *;`
   },
 };
