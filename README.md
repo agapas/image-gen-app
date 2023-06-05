@@ -1,6 +1,6 @@
 # image-gen-app
 
-A simple image generator application written in React and Typescript. The app creates unique images based on provided text description using [OpenAI API](https://platform.openai.com/docs/api-reference/images/create) (DALL-E model). Also, an example of error handling is added.
+A simple image generator application written in React and Typescript. The app creates unique images based on provided text description using [OpenAI API](https://platform.openai.com/docs/api-reference/images/create) (DALL-E model).
 
 ## UI Example
 

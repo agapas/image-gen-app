@@ -1,6 +1,6 @@
 import getConfig from "next/config";
 import { Configuration, OpenAIApi, CreateImageRequestSizeEnum } from "openai";
-import { useState, PropsWithChildren } from "react";
+import { useState } from "react";
 import { Button } from "../components/Button";
 import { Result } from "../components/Result";
 import { Select } from "../components/Select";
@@ -50,7 +50,7 @@ export default function App() {
     setLoading(true);
 
     // const generatedExample =
-    //   "https://oaidalleapiprodscus.blob.core.windows.net/private/org-vlaWMOf9DQoKKX0PkXCBPwgR/user-MEP4wZ1uPHbxJmXj5jVL0cHe/img-2FiLXg2JuZX0tpzz4dyYT5Ff.png?st=2023-05-10T14%3A34%3A49Z&se=2023-05-10T16%3A34%3A49Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2023-05-10T02%3A38%3A18Z&ske=2023-05-11T02%3A38%3A18Z&sks=b&skv=2021-08-06&sig=bs8m6YEQun5ggg/yz3YfItsFRC0dOBiKl4ewZHnItGk%3D";
+    //   "https://oaidalleapiprodscus.blob.core.windows.net/private/org-vlaWMOf9DQoKKX0PkXCBPwgR/user-MEP4wZ1uPHbxJmXj5jVL0cHe/img-yA7Z2nfrncc6Cyo7hainoVI8.png?st=2023-05-16T15%3A36%3A02Z&se=2023-05-16T17%3A36%3A02Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2023-05-15T22%3A08%3A30Z&ske=2023-05-16T22%3A08%3A30Z&sks=b&skv=2021-08-06&sig=u/kTYaKIObY5apD4%2BurfxiDVVUa3oSosdJrm%2B30dmqc%3D";
 
     // setTimeout(() => {
     //   setLoading(false);
